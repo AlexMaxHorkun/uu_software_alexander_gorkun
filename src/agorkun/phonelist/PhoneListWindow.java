@@ -12,12 +12,13 @@ import java.beans.PropertyChangeListener;
 import java.util.*;
 
 /**
+ * Main application.
+ *
  * @author Alexander Gorkun
  */
 public class PhoneListWindow {
     private JFrame mainFrame;
     private JLabel listsLabel;
-    private JLabel binLabel;
     private JTable phoneListTable;
     private java.util.List<Phone> phoneList;
     private PhoneAddWindow phoneAddModal;
@@ -26,7 +27,6 @@ public class PhoneListWindow {
         phoneList=phones;
         prepareMainWindow();
         prepareListsLabel();
-        prepareBinLabel();
         preparePhoneList();
         prepareAddButton();
         preparePhoneAddModal();
@@ -58,17 +58,6 @@ public class PhoneListWindow {
         c.gridx=1;
         c.gridy=1;
         mainFrame.add(listsLabel, c);
-    }
-
-    protected void prepareBinLabel(){
-        binLabel=new JLabel("Drag n Drop phones to trash can");
-        GridBagConstraints c=new GridBagConstraints();
-        c.weightx=0.5;
-        c.weighty=0.5;
-        c.fill=GridBagConstraints.HORIZONTAL;
-        c.gridx=2;
-        c.gridy=1;
-        mainFrame.add(binLabel, c);
     }
 
     protected void preparePhoneList(){
@@ -132,7 +121,6 @@ public class PhoneListWindow {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.setEnabled(false);
                 phoneAddModal.open();
             }
         });
@@ -143,7 +131,12 @@ public class PhoneListWindow {
     }
 
     protected void preparePhoneAddModal(){
-        phoneAddModal=new PhoneAddWindow(this);
+        phoneAddModal=new PhoneAddWindow(this, new PhoneValidator());
+    }
+
+    public void addPhone(Phone p){
+        phoneList.add(p);
+        phoneListTable.updateUI();
     }
 
     public JFrame getFrame(){

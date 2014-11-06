@@ -1,6 +1,8 @@
 package agorkun.phonelist;
 
 /**
+ * Entity.
+ *
  * @author Alexander Gorkun.
  */
 public class Phone {
@@ -11,9 +13,8 @@ public class Phone {
 
     public Phone(){}
 
-    public Phone(int id, String name, String lname, String p){
+    public Phone(String name, String lname, String p){
         this();
-        this.id=id;
         this.name=name;
         lastname=lname;
         phone=p;
