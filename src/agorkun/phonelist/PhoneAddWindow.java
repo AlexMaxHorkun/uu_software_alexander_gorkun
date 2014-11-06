@@ -108,19 +108,19 @@ public class PhoneAddWindow extends JDialog{
                     dispose();
                 }
                 else{
-                    if(errors.contains(PhoneValidator.Errors.NAME_EMPTY)){
+                    if(errors.contains(PhoneValidator.Errors.NAME_EMPTY) || errors.contains(PhoneValidator.Errors.NAME_INVALID)){
                         nameField.setBorder(BorderFactory.createLineBorder(Color.RED, 2, true));
                     }
                     else{
                         nameField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
                     }
-                    if(errors.contains(PhoneValidator.Errors.LASTNAME_EMPTY)){
+                    if(errors.contains(PhoneValidator.Errors.LASTNAME_EMPTY) || errors.contains(PhoneValidator.Errors.LASTNAME_INVALID)){
                         lastnameField.setBorder(BorderFactory.createLineBorder(Color.RED, 2, true));
                     }
                     else{
                         lastnameField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
                     }
-                    if(errors.contains(PhoneValidator.Errors.PHONE_EMPTY)){
+                    if(errors.contains(PhoneValidator.Errors.PHONE_EMPTY) || errors.contains(PhoneValidator.Errors.PHONE_INVALID)){
                         phoneField.setBorder(BorderFactory.createLineBorder(Color.RED, 2, true));
                     }
                     else{
