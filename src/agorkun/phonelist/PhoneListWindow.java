@@ -143,6 +143,10 @@ public class PhoneListWindow {
     }
 
     protected void preparePhoneAddModal(){
-        phoneAddModal=new PhoneAddWindow();
+        phoneAddModal=new PhoneAddWindow(this);
+    }
+
+    public JFrame getFrame(){
+        return mainFrame;
     }
 }
