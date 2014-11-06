@@ -6,6 +6,9 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 
 /**
@@ -17,19 +20,19 @@ public class PhoneListWindow {
     private JLabel binLabel;
     private JTable phoneListTable;
     private java.util.List<Phone> phoneList;
+    private PhoneAddWindow phoneAddModal;
 
     public PhoneListWindow(java.util.List<Phone> phones){
         phoneList=phones;
-    }
-
-    public void start(){
-        if(!(mainFrame==null)){
-            throw new RuntimeException("Already started");
-        }
         prepareMainWindow();
         prepareListsLabel();
         prepareBinLabel();
         preparePhoneList();
+        prepareAddButton();
+        preparePhoneAddModal();
+    }
+
+    public void start(){
         mainFrame.setVisible(true);
     }
 
@@ -43,6 +46,7 @@ public class PhoneListWindow {
         GridBagLayout layout=new GridBagLayout();
         mainFrame.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         mainFrame.setLayout(layout);
+        mainFrame.setLocationRelativeTo(null);
     }
 
     protected void prepareListsLabel(){
@@ -62,7 +66,7 @@ public class PhoneListWindow {
         c.weightx=0.5;
         c.weighty=0.5;
         c.fill=GridBagConstraints.HORIZONTAL;
-        c.gridx=3;
+        c.gridx=2;
         c.gridy=1;
         mainFrame.add(binLabel, c);
     }
@@ -120,6 +124,25 @@ public class PhoneListWindow {
         c.gridx=1;
         c.gridy=2;
         mainFrame.add(scrollPane,c);
-        scrollPane.setPreferredSize(new Dimension(mainFrame.getWidth()/4*3, mainFrame.getHeight()/4*3));
+        scrollPane.setPreferredSize(new Dimension(mainFrame.getWidth() / 4 * 3, mainFrame.getHeight() / 4 * 3));
+    }
+
+    protected void prepareAddButton(){
+        JButton add=new JButton("Add");
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.setEnabled(false);
+                phoneAddModal.open();
+            }
+        });
+        GridBagConstraints c=new GridBagConstraints();
+        c.gridy=3;
+        c.gridx=1;
+        mainFrame.add(add, c);
+    }
+
+    protected void preparePhoneAddModal(){
+        phoneAddModal=new PhoneAddWindow();
     }
 }
