@@ -40,21 +40,35 @@ public class PhoneListWindow {
         mainFrame=new JFrame("Alexander Gorkun's phone list");
         mainFrame.setSize(640, 240);
         mainFrame.setResizable(false);
-        mainFrame.setLayout(new GridLayout(2, 2));
+        GridBagLayout layout=new GridBagLayout();
+        mainFrame.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        mainFrame.setLayout(layout);
     }
 
     protected void prepareListsLabel(){
         listsLabel=new JLabel("Phones list");
-        mainFrame.add(listsLabel);
+        GridBagConstraints c=new GridBagConstraints();
+        c.weightx=1;
+        c.weighty=0.5;
+        c.fill=GridBagConstraints.HORIZONTAL;
+        c.gridx=1;
+        c.gridy=1;
+        mainFrame.add(listsLabel, c);
     }
 
     protected void prepareBinLabel(){
         binLabel=new JLabel("Drag n Drop phones to trash can");
-        mainFrame.add(binLabel);
+        GridBagConstraints c=new GridBagConstraints();
+        c.weightx=0.5;
+        c.weighty=0.5;
+        c.fill=GridBagConstraints.HORIZONTAL;
+        c.gridx=3;
+        c.gridy=1;
+        mainFrame.add(binLabel, c);
     }
 
     protected void preparePhoneList(){
-        TableModel dataModel=new AbstractTableModel() {
+        TableModel dataModel=new DefaultTableModel() {
             @Override
             public int getRowCount() {
                 return phoneList.size();
@@ -82,9 +96,30 @@ public class PhoneListWindow {
                         throw new RuntimeException("Wrong column index");
                 }
             }
+
+            @Override
+            public String getColumnName(int ind){
+                switch (ind){
+                    case 0:
+                        return "Name";
+                    case 1:
+                        return "Last Name";
+                    case 2:
+                        return "Phone";
+                    default:
+                        throw new RuntimeException();
+                }
+            }
         };
         phoneListTable=new JTable(dataModel);
         JScrollPane scrollPane=new JScrollPane(phoneListTable);
-        mainFrame.add(scrollPane);
+        GridBagConstraints c=new GridBagConstraints();
+        c.weightx=1;
+        c.weighty=1;
+        c.fill=GridBagConstraints.BOTH;
+        c.gridx=1;
+        c.gridy=2;
+        mainFrame.add(scrollPane,c);
+        scrollPane.setPreferredSize(new Dimension(mainFrame.getWidth()/4*3, mainFrame.getHeight()/4*3));
     }
 }
