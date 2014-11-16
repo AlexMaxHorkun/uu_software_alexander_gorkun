@@ -47,6 +47,7 @@ public class PhoneListWindow {
         mainFrame.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         mainFrame.setLayout(layout);
         mainFrame.setLocationRelativeTo(null);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     protected void prepareListsLabel(){
