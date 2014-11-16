@@ -1,3 +1,5 @@
+package agorkun.phonelist;
+
 import agorkun.phonelist.Phone;
 import agorkun.phonelist.PhoneListWindow;
 
