@@ -138,8 +138,11 @@ public class PhoneAddWindow extends JDialog{
 
     public void clearForm(){
         nameField.setText("");
+        nameField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         lastnameField.setText("");
+        lastnameField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         phoneField.setText("");
+        phoneField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
     }
 
     public PhoneValidator getValidator() {
